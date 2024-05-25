@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "build-blogapp": "cd BlogApp && npm install && npm run build && cd .."
+    "build": "npm i && npm i --prefix BlogApp && npm run build --prefix client"
   },
   "author": "dhruvSeth",
   "license": "ISC",
