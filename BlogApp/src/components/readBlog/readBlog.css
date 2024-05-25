@@ -1,0 +1,82 @@
+.blogPage blockquote {
+    font-size: 30px;
+    border-left: 4px solid white;
+    background-color: rgba(75, 75, 75, 0.397);
+    padding-left: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.blogPage p {
+    font-size: 18px;
+    text-align: justify;
+}
+
+.blogPage pre {
+    background-color: #160736;
+    overflow: auto;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 20px;
+}
+
+.button {
+    border: 2px solid #24b4fb;
+    border-radius: 0.9em;
+    position: relative;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+}
+
+.button span {
+    display: flex;
+    padding: 8px 20px 8px 15px;
+    gap: 4px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: #0071e2;
+}
+
+
+
+
+
+.bin-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    background-color: rgb(255, 95, 95);
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.bin-bottom {
+    width: 15px;
+}
+
+.bin-top {
+    width: 17px;
+    transform-origin: right;
+    transition-duration: 0.3s;
+}
+
+.bin-button:hover .bin-top {
+    transform: rotate(45deg);
+}
+
+.bin-button:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.bin-button:active {
+    transform: scale(0.9);
+}

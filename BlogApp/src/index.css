@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-family: recoleta-web, Georgia, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol; */
+}
+body{
+  background-color: #fff;
+}
+.toast{
+  font-weight: bold;
+  border: 1px solid grey;
+}
+.toast div{
+  display: flex;
+  gap:20px;
+}
+
+::selection{
+  background-color: grey;
+}
+.ql-toolbar button.octicon, .ql-toolbar button.fa {
+  border: none;
+  background: none;
+  width: 1.5em;
+  color: #444;
+}
+
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+  filter: invert(1);
+}
+.ql-snow .ql-picker-label{
+  filter: invert(1);
+  font-weight: bold;
+}
+
+.ql-snow .ql-editor pre.ql-syntax {
+  background-color: #160736;
+  color: white;
+  font-weight: bold;
+  font-size:15px;
+  overflow: visible;
+}
+
+.ql-editor {
+  font-size: 16px;
+}
+.ql-snow .ql-editor blockquote{
+  padding: 8px;
+  padding-left: 20px;
+  border-left: 4px solid rgb(160, 220, 20) ;
+  font-weight: bold;
+  background-color: rgba(160, 220, 20, 0.148);
+  /* background-color: rgba(220, 20, 60, 0.148); */
+}
