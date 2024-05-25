@@ -18,10 +18,10 @@ app.use(cors());
 app.use(bodyParser.json({extended:true}));
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.use('/api',userRoutes);
-app.use('/api',blogRoutes);
+app.use('/api/',userRoutes);
+app.use('/api/',blogRoutes);
 
-app.use(express.static(path.resolve(__dirname,"./BlogApp/dist")));
+app.use(express.static(path.resolve(__dirname,"BlogApp","dist")));
 
 app.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,"BlogApp","dist","index.html"));
