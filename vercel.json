@@ -15,8 +15,5 @@
     "routes": [
             {"src": "api/(.*)", "dest": "index.js"},
             { "src": "/(.*)", "dest": "./BlogApp/dist/index.html"}
-    ],
-    "hooks": {
-        "predeploy": "npm run build-blogapp"
-    }
+    ]
 }
