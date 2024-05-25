@@ -10,7 +10,7 @@ import Map from './Map';
 const Contact = () => {
   return (
     <>  
-        <section className="about-home">
+        <section className="about-home bg-blue-900 h-[180px] pt-0">
             <h2>Contact Us</h2>
         </section>
         <hr/>

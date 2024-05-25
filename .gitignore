@@ -1,5 +1,6 @@
 # Logs
 *.env
+vercel.json
 logs
 *.log
 npm-debug.log*
@@ -11,7 +12,6 @@ lerna-debug.log*
 node_modules
 dist-ssr
 *.local
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

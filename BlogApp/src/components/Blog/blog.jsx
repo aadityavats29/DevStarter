@@ -73,7 +73,7 @@ const Blog = () => {
         <>
             <div className="mt-[80px]">
                 <div className="flex justify-center">
-                    <div className="w-[100%] md:w-auto flex justify-around gap-2 pl-[30px] pr-[30px] md:gap-[60px] flex-col md:flex-row ">
+                    <div className="w-[100%] md:w-auto flex justify-around gap-4 pl-[30px] pr-[30px] md:gap-[60px] flex-col md:flex-row ">
                         <Autocomplete freeSolo inputValue={inputValue} onChange={onInputTypeChange} onInputChange={(event,newValue)=>{setInputValue(newValue);setType('')}} options={Category} className="md:w-[400px] " renderInput={(params) => (<TextField {...params} label="Select a Category" />)} />
                         <button onClick={navigateCreateBlog} className="cssbuttons-io pt-2 pb-2"> <span><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><IoCodeSlashSharp style={{fontSize:'25px'}}/></svg>Create</span></button>
                     </div>  

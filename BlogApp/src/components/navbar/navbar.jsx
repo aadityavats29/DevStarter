@@ -1,5 +1,5 @@
-import React,{useContext} from 'react';
-import {AppBar,Toolbar,styled,Box,Drawer} from '@mui/material';
+import React, { useContext } from 'react';
+import { AppBar, Toolbar, styled, Box, Drawer } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LoginButton from './loginSection';
@@ -37,7 +37,7 @@ const ScrollTrack = styled(Box)`
 const Navbar = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [isClosing, setIsClosing] = React.useState(false);
-    const {account} = useContext(DataContext);
+    const { account } = useContext(DataContext);
 
     const handleDrawerClose = () => {
         setIsClosing(true);
@@ -47,7 +47,13 @@ const Navbar = () => {
     const handleDrawerTransitionEnd = () => {
         setIsClosing(false);
     };
-
+    const NaviButton = styled(NavLink)`
+        padding-top:20px;
+        padding-bottom:20px;
+        color:white;
+        text-decoration:none;
+        text-align:center;
+    `
     const handleDrawerToggle = () => {
         if (!isClosing) {
             setMobileOpen(!mobileOpen);
@@ -56,28 +62,36 @@ const Navbar = () => {
     return (
         <>
             <Box sx={{ display: 'flex' }}>
-                <AppBar  position="fixed" sx={{ width:'100%'}} >
-                    <EditToolbar className='bg-black' position='fixed' sx={{height:{xs:'65px'}}}>
-                        <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ display: { sm: 'none' } ,position:'absolute',left:'5vh',scale:'1.4'}} >
+                <AppBar position="fixed" sx={{ width: '100%' }} >
+                    <EditToolbar className='bg-black' position='fixed' sx={{ height: { xs: '65px' } }}>
+                        <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ display: { sm: 'none' }, position: 'absolute', left: '5vh', scale: '1.4' }} >
                             <MenuIcon />
                         </IconButton>
                         <div className='w-[44%] hidden sm:flex justify-around'>
-                            <NavLink style={{fontSize:"20px"}} to={'/intro'}>Intro</NavLink>
-                            <NavLink style={{fontSize:"20px"}} to={'/about'}>About</NavLink>
-                            <NavLink style={{fontSize:"20px"}} to={'/contact'}>Contact</NavLink>
-                            {account && <NavLink style={{fontSize:"20px"}} to={'/blogs'}>Blogs</NavLink>}
+                            <NavLink style={{ fontSize: "20px" }} to={'/intro'}>Intro</NavLink>
+                            <NavLink style={{ fontSize: "20px" }} to={'/about'}>About</NavLink>
+                            <NavLink style={{ fontSize: "20px" }} to={'/contact'}>Contact</NavLink>
+                            {account && <NavLink style={{ fontSize: "20px" }} to={'/blogs'}>Blogs</NavLink>}
                         </div>
-                        <LoginButton/>
+                        <LoginButton />
                     </EditToolbar>
                 </AppBar>
-                <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }}} aria-label="mailbox folders">
+                <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                     <Drawer variant="temporary" open={mobileOpen} onTransitionEnd={handleDrawerTransitionEnd} onClose={handleDrawerClose}
-                        ModalProps={{keepMounted: true}}
-                        sx={{display: { xs: 'block', sm: 'none' },'& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth,backgroundColor: '#191919', },}}>
+                        ModalProps={{ keepMounted: true }}
+                        sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#191919', }, }}>
+                        <Box style={{width:'100%',display:'flex',flexDirection:'column',paddingTop:'30px'}}>
+                        <Box style={{width:'100%',display:'flex',flexDirection:'column'}}>   
+                            <NaviButton onClick={handleDrawerClose} className="active" to={'/'}>home</NaviButton>
+                            <NaviButton  onClick={handleDrawerClose} className="active" to={'/about'}>About</NaviButton>
+                            <NaviButton  onClick={handleDrawerClose} className="active" to={'/contact'}>Contact</NaviButton>
+                            {account && <NaviButton  onClick={handleDrawerClose} className="active" to={`/blogs`}>Blogs</NaviButton>}
+                        </Box>
+                    </Box>
                     </Drawer>
                 </Box>
             </Box>
-            <ScrollTrack sx={{ top: { sm: '64px', xs: '56px' } ,zIndex:'3'}}></ScrollTrack>
+            <ScrollTrack sx={{ top: { sm: '64px', xs: '56px' }, zIndex: '3' }}></ScrollTrack>
         </>
     );
 }

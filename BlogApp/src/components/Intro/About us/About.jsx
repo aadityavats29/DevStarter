@@ -10,9 +10,6 @@ import Footer from '../Footer/Footer.jsx';
 const About = () => {
   return (
     <>
-        <section className="about-home">
-            <h2>About Us</h2>
-        </section>
         <section id="experts">
             <h1 style={{color:'white'}}>Community Experts</h1>
             <p>Replenish man have thing gathering lights yieding shall you</p>

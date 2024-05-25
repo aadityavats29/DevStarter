@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleBlog } from "../api/api";
@@ -30,7 +31,6 @@ const ReadBlog = () => {
                 setLikeCount(response.Blog.totalLikes);
             }
         }
-
         BlogDetails();
     }, [blogId]);
 

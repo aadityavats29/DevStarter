@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState, useRef } from "react";
 import MailIcon from '@mui/icons-material/Mail';
 import { FaUser } from "react-icons/fa";
