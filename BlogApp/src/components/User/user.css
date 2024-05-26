@@ -1,0 +1,20 @@
+.createBlog {
+    border: 2px solid #104f6e;
+    background-color: #2099d6;
+    border-radius: 0.4em;
+    padding: 0.6em 1em 0.6em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+}
+
+.createBlog span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+}
+
+.createBlog:hover {
+    background-color: #0071e2;
+}

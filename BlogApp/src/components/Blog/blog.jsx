@@ -65,7 +65,7 @@ const Blog = () => {
     const navigateCreateBlog = ()=>{
         setTimeout(()=>{
             navigate(`/createblog`);
-        },300);
+        },100);
     }
 
 

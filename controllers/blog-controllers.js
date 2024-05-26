@@ -269,7 +269,7 @@ export const getComment = async (req, res) => {
         console.log(err);
         return res.status(500).json({
             status: 'fail',
-            message: 'Error while getting all the comment for the Blog'
+            message: 'Error while getting all the comment'
         })
     }
 }
@@ -373,6 +373,30 @@ export const checkBookMark = async (req,res)=>{
             status:'empty',
             bookmark:false,
             message:'Bookmark not found'
+        })
+    } catch(error){
+        console.log(error);
+        return res.status(500).json({
+            status: 'fail',
+            message: 'Error while check if Bookmark Exist'
+        })
+    }
+}
+
+export const getBookmark = async (req,res)=>{
+    try{
+        const user = await User.findById(req.params.userId);
+        if(!user){
+            return res.status(404).json({
+                message:"User not Found"
+            })
+        }
+        const bookmarkedIDs = user.bookMarked;
+        const bookmarkedBlogs = await Blog.find({ _id: { $in: bookmarkedIDs } });
+        console.log(bookmarkedBlogs);
+        return res.status(200).json({
+            status:'success',
+            blog:bookmarkedBlogs
         })
     } catch(error){
         console.log(error);

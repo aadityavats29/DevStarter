@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { userBlogs } from "../api/api";
+import { getAllBookmarked } from "../api/api";
 import ShowBlog from "../Blog/showBlogs";
-const UserBlog = ()=>{
+
+const BookMark = ()=>{
     const [blog,setBlog] = useState([]);
     useEffect(()=>{  
         const getUserBlog = async () =>{
-            const response = await userBlogs();
+            const response = await getAllBookmarked();
             if(response.status === 'success'){
-                setBlog(response.blogs);
+                setBlog(response.blog);
             }
         }
         getUserBlog();
@@ -16,4 +17,4 @@ const UserBlog = ()=>{
         <ShowBlog blog={blog} />
     </>)
 }
-export default UserBlog;
+export default BookMark;

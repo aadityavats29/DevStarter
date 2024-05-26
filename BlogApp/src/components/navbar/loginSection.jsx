@@ -12,7 +12,6 @@ const StyledMenu = styled((props) => (
     '& .MuiPaper-root': {
         borderRadius: 6,
         marginTop: theme.spacing(0.5),
-        backgroundColor: '#272829    ',
         minWidth: 140,  
         width: 140
     },
@@ -40,10 +39,12 @@ const LoginButton = () => {
     const navigate = useNavigate();
     const logout = () => {
         localStorage.clear();
+        handleClose()
         window.location.reload();
     }
     const UserPage = ()=>{
         navigate('/user');
+        handleClose();
     }
 
 
@@ -59,13 +60,13 @@ const LoginButton = () => {
                             </div>
                             <StyledMenu sx={{ display: 'flex', flexDirection: 'column' }} id="basic-menu" MenuListProps={{ 'aria-labelledby': 'basic-button' }} anchorEl={anchorEl} open={open} onClose={handleClose} >
                                 <Button onClick={UserPage} style={{ width: '100%', color: 'white' }} variant="text">Profile</Button>
-                                <Button style={{ width: '100%', color: 'white' }} variant="text">About</Button>
+                                <Button onClick={handleClose} style={{ width: '100%', color: 'white' }} variant="text">About</Button>
                                 <Button onClick={logout} style={{ width: '100%', color: 'white' }} variant="text">Log Out</Button>
                             </StyledMenu>
                         </div>
                     </>
                     :
-                    <button onClick={() => { navigate('/login') }} style={{ position: 'absolute', right: '30px',bottom:'10px',color:'white',scale:'0.85'}} className="btn">LOGIN</button>
+                    <button className="absolute btn right-[7px] md:right-[30px]" onClick={() => { navigate('/login') }} style={{ position: 'absolute',bottom:'10px',color:'white',scale:'0.85'}}>LOGIN</button>
             }
 
         </>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = `${window.location.origin}/api`;
+const url = `http://localhost:8092/api`;
 
 export const LoginUser = async (data) => {
     try {
@@ -126,8 +126,8 @@ export const getTypeBlog = async (category,inputValue) => {
         console.log("Error while getting all the Blog", error);
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -158,8 +158,8 @@ export const getSingleBlog = async (blogId)=>{
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -183,8 +183,8 @@ export const checkLike = async (blogId) => {
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -208,8 +208,8 @@ export const LikeBlog = async (blogId,authorId)=>{
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -236,8 +236,8 @@ export const Bookmark = async (blogId)=> {
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -265,8 +265,8 @@ export const checkBookmark = async (blogId)=>{
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -295,8 +295,8 @@ export const getUserDetails = async ()=>{
     } catch(error){
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -322,8 +322,8 @@ export const userBlogs = async ()=>{
         console.log("Error while getting user Blog ",error);
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -350,8 +350,8 @@ export const UpdateBlog = async (blogId,data)=>{
         console.log("Error while Updating user Blog ",error);
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -377,8 +377,8 @@ export const deleteBlog = async (blogId)=>{
         console.log("Error while Deleteing user Blog ",error);
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {
@@ -404,8 +404,62 @@ export const deleteUser = async () => {
         console.log("Error while Deleting the User ",error);
         if (error.response?.status >= 400) {
             return {
-                status: error.response.status,
-                message: error.response.message
+                status: error.response.data.status,
+                message: error.response.data.message
+            }
+        }
+        return {
+            message: "Internet is Slow try again"
+        }
+    }
+}
+
+export const UpdateUser = async (userData)=>{
+    try{
+        const response = await axios.put(`${url}/user/${localStorage.getItem('userId')}`,userData,{
+            headers: {
+                authorization: localStorage.getItem("token")
+            },
+            timeout: 4000,
+        });
+        if(response.status && response.status===200){
+            return {
+                status: response.data.status,
+                message:response.data.message
+            }
+        }
+    } catch(error){
+        console.log("Error while Updating the User ",error);
+        if (error.response?.status >= 400) {
+            return {
+                status: error.response.data.status,
+                message: error.response.data.message
+            }
+        }
+        return {
+            message: "Internet is Slow try again"
+        }
+    }
+}
+export const getAllBookmarked = async ()=>{
+    try{
+        console.log("reach here");
+        const response = await axios.get(`${url}/getbookmark/${localStorage.getItem('userId')}`,{
+            headers: {
+                authorization: localStorage.getItem("token")
+            },
+            timeout: 4000,
+        });
+        return {
+            status:response.data.status,
+            blog:response.data.blog
+        }
+    } catch(error){
+        console.log("Error while getting user Blog ",error);
+        if (error.response?.status >= 400) {
+            return {
+                status: error.response.data.status,
+                message: error.response.data.message
             }
         }
         return {

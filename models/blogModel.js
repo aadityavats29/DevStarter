@@ -8,24 +8,24 @@ const blogSchema = {
     },
     title:{
         type:String,
-        required:true,
+        required:[true, 'Title is required'],
     },
     description:{
         type:String,
-        required:true,
+        required:[true, 'Description is required'],
     },
     author:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'blogUser',
-        required:true
+        required:[true, 'Author is required']
     },
     category:{
         type:String,
-        required:true,
+        required:[true, 'Category is required'],
     },
     data:{
         type:String,
-        required:true
+        required:[true, 'Data is required']
     },
     totalLikes:{
         type:Number,

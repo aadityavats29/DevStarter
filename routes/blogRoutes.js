@@ -1,5 +1,5 @@
 import express from "express";
-import { createBlog,getUserBlog,checkBookMark,getSelectedBlog,Bookmark,checkIfLike,updateBlog,deleteBlog,getSingleBlog,LikedOrDisliked,createComment,getComment,deleteComment} from "../controllers/blog-controllers.js";
+import { createBlog,getUserBlog,checkBookMark,getBookmark,getSelectedBlog,Bookmark,checkIfLike,updateBlog,deleteBlog,getSingleBlog,LikedOrDisliked,createComment,getComment,deleteComment} from "../controllers/blog-controllers.js";
 import middlewareAuth from "../controllers/MiddlewareAuth.js";
 const blogRoutes = express.Router();
 
@@ -10,6 +10,9 @@ blogRoutes.route('/liked/:blogId')
 blogRoutes.route('/bookmark/:blogId')
 .get(middlewareAuth,checkBookMark)
 .post(middlewareAuth,Bookmark);
+
+blogRoutes.route('/getbookmark/:userId')
+.get(middlewareAuth,getBookmark);
 
 blogRoutes.route('/comment/:blogId')
 .get(middlewareAuth,getComment)

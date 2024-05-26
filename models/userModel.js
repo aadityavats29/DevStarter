@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = mongoose.Schema({
     username:{
@@ -6,15 +7,15 @@ const userSchema = mongoose.Schema({
         unique:true,
         required:true,
         trim:true,
-        minlength:3,
-        maxlength:20,
-        match: /^[a-zA-Z0-9_-]+$/,
+        minlength:[3, 'Username must be at least 3 characters'],
+        maxlength:[20, 'Username must be less than 20 characters'],
+        match: [ /^[a-zA-Z0-9_-]+$/, 'Username is invalid' ],
         default:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBQLZBLliHC0oAh1vMfI7Z5IzTV8_RlzVeh6QqSzs_SCqn5a0rkuXEoVsuDPNxMntF0vc&usqp=CAU'
     },
     email:{
         type:String,
         unique:true,
-        required:true,
+        required:[true, 'Email is required'],
         trim:true,
     },
     password:{
@@ -45,5 +46,7 @@ const userSchema = mongoose.Schema({
         default:0
     }
 })
+
+userSchema.plugin(uniqueValidator, { message: '{PATH} already exists. Please choose another one.' });
 const User = mongoose.model('blogUser',userSchema);
 export default User;

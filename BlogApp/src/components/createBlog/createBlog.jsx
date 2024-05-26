@@ -60,8 +60,7 @@ const CreateBlog = () => {
             const FileName = new Date().getTime() + selectedFile.name;
             const storageRef = ref(storage,FileName);
             const uploadTask = uploadBytesResumable(storageRef,selectedFile);
-            uploadTask.on(
-                'state_changed',
+            uploadTask.on('state_changed',
                 (snapshot)=>{
                     setProgress(true);
                     const progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
@@ -148,7 +147,7 @@ const CreateBlog = () => {
                         <img className={`w-[100%] h-[100%] opacity-80 ${showProgress && 'opacity-25'}`} src={imageUrl || 'https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg'} alt="Blog Image" />
                         {showProgress && <CircularProgressbar background backgroundPadding={6} styles={buildStyles({ backgroundColor: "black",textColor: "#fff",pathColor: "#fff",trailColor: "transparent"})} className='w-[80px] text-white absolute inset-y-0 left-1/2 top-1/3 transform -translate-x-1/2' value={imageFileUploadProgress} text={`${imageFileUploadProgress}%`} />}
                         <input type="file" ref={fileInputRef} style={{ display: 'none' }} accept=".jpg, .jpeg, .png" onChange={handleFileChange} />
-                        <FaPlus  onClick={handleSpeedDialClick}  style={{ position: 'absolute', bottom: 16, right: 16,borderRadius:'50%',width:'50px',height:'50px',padding:'13px',color:'white',backgroundColor:'#5755FE',border:'2px solid white'}} />
+                        <FaPlus  onClick={handleSpeedDialClick}  style={{ position: 'absolute', bottom: 16, right: 16,borderRadius:'50%',width:'50px',height:'50px',padding:'13px',color:'white',backgroundColor:'#5755FE',border:'2px solid white',cursor:'pointer'}} />
                     </div>
                 </div>
                 <div className='flex justify-center'>

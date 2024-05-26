@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Box component="nav" sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }} aria-label="mailbox folders">
                     <Drawer variant="temporary" open={mobileOpen} onTransitionEnd={handleDrawerTransitionEnd} onClose={handleDrawerClose}
                         ModalProps={{ keepMounted: true }}
-                        sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: '#191919', }, }}>
+                        sx={{ display: { xs: 'block', sm: 'none' }, '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: 'black', }, }}>
                         <Box style={{width:'100%',display:'flex',flexDirection:'column',paddingTop:'30px'}}>
                         <Box style={{width:'100%',display:'flex',flexDirection:'column'}}>   
                             <NaviButton onClick={handleDrawerClose} className="active" to={'/'}>home</NaviButton>
