@@ -53,7 +53,7 @@ const LoginButton = () => {
             {
                 account ?
                     <>
-                        <div className='absolute right-[40px] top-3 gap-2 flex cursor-pointer' >
+                        <div className='absolute right-[20px] md:right-[40px] top-3 gap-2 flex cursor-pointer' >
                             <div onClick={handleClick} className='flex gap-2'>
                                 <img  className='w-[45px] h-[45px] relative rounded-full ring-gray-300 dark:ring-gray-500' src={localStorage.getItem('userImage') || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBQLZBLliHC0oAh1vMfI7Z5IzTV8_RlzVeh6QqSzs_SCqn5a0rkuXEoVsuDPNxMntF0vc&usqp=CAU'} />
                                 <p className='relative top-[8px] hidden md:block text-lg'>{localStorage.getItem('username')}</p>
@@ -68,7 +68,6 @@ const LoginButton = () => {
                     :
                     <button className="absolute btn right-[7px] md:right-[30px]" onClick={() => { navigate('/login') }} style={{ position: 'absolute',bottom:'10px',color:'white',scale:'0.85'}}>LOGIN</button>
             }
-
         </>
     )
 }

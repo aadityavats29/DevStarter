@@ -55,7 +55,6 @@ export const loginUser = async (req, res) => {
             })
         }
         const findUser = await User.findOne({ email: req.body.email }).select('+password');
-        console.log(findUser);
         if (!findUser) {
             return res.status(401).json({
                 status: 'fail',
