@@ -39,6 +39,7 @@ const ReadBlog = () => {
             const response = await checkLike(blogId);
             if (response.status && response.status === 'success') {
                 setLike(true);
+                setClickike(false);
             }
         }
         const checkForBookmart = async () => {
