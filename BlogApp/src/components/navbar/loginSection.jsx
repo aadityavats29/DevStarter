@@ -46,6 +46,10 @@ const LoginButton = () => {
         navigate('/user');
         handleClose();
     }
+    const BlogPage = ()=>{
+        navigate('/blogs');
+        handleClose();
+    }
 
 
     return (
@@ -60,7 +64,7 @@ const LoginButton = () => {
                             </div>
                             <StyledMenu sx={{ display: 'flex', flexDirection: 'column' }} id="basic-menu" MenuListProps={{ 'aria-labelledby': 'basic-button' }} anchorEl={anchorEl} open={open} onClose={handleClose} >
                                 <Button onClick={UserPage} style={{ width: '100%', color: 'white' }} variant="text">Profile</Button>
-                                <Button onClick={handleClose} style={{ width: '100%', color: 'white' }} variant="text">About</Button>
+                                <Button onClick={BlogPage} style={{ width: '100%', color: 'white' }} variant="text">Blogs</Button>
                                 <Button onClick={logout} style={{ width: '100%', color: 'white' }} variant="text">Log Out</Button>
                             </StyledMenu>
                         </div>

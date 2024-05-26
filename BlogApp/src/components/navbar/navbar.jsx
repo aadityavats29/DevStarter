@@ -67,10 +67,11 @@ const Navbar = () => {
                         <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ display: { sm: 'none' }, position: 'absolute', left: '5vh', scale: '1.4' }} >
                             <MenuIcon />
                         </IconButton>
-                        <div className='w-[44%] hidden sm:flex justify-around'>
+                        <div className='w-[55%] hidden sm:flex justify-around'>
                             <NavLink style={{ fontSize: "20px" }} to={'/intro'}>Intro</NavLink>
                             <NavLink style={{ fontSize: "20px" }} to={'/about'}>About</NavLink>
                             <NavLink style={{ fontSize: "20px" }} to={'/contact'}>Contact</NavLink>
+                            {account && <NavLink style={{ fontSize: "20px" }} to={'/user'}>Profile</NavLink>}
                             {account && <NavLink style={{ fontSize: "20px" }} to={'/blogs'}>Blogs</NavLink>}
                         </div>
                         <LoginButton />
@@ -83,7 +84,7 @@ const Navbar = () => {
                         <Box style={{width:'100%',display:'flex',flexDirection:'column',paddingTop:'30px'}}>
                         <Box style={{width:'100%',display:'flex',flexDirection:'column'}}>   
                             <NaviButton onClick={handleDrawerClose} className="active" to={'/'}>home</NaviButton>
-                            <NaviButton  onClick={handleDrawerClose} className="active" to={'/about'}>About</NaviButton>
+                            <NaviButton  onClick={handleDrawerClose} className="active" to={'/user'}>Profile</NaviButton>
                             <NaviButton  onClick={handleDrawerClose} className="active" to={'/contact'}>Contact</NaviButton>
                             {account && <NaviButton  onClick={handleDrawerClose} className="active" to={`/blogs`}>Blogs</NaviButton>}
                         </Box>
