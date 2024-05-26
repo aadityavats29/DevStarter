@@ -11,14 +11,14 @@ export const signInUser = async (req, res) => {
                 message: "All Fields are Required"
             })
         }
-        const isUserExist = await User.find({ username: req.body.username });
+        const isUserExist = await User.findOne({ username: req.body.username });
         if (isUserExist.length !== 0) {
             return res.status(409).json({
                 status: 'fail',
                 message: 'User with this username already Exist'
             })
         }
-        const useEmailExist = await User.find({ email: req.body.email });
+        const useEmailExist = await User.findOne({ email: req.body.email });
         if (useEmailExist.length !== 0) {
             return res.status(400).json({
                 status: 'fail',
@@ -32,7 +32,7 @@ export const signInUser = async (req, res) => {
             email: req.body.email,
             image: req.body.image
         })
-        newUser.save();
+        await newUser.save();
         return res.status(201).json({
             status: 'success',
             message: 'User Created'
@@ -54,7 +54,8 @@ export const loginUser = async (req, res) => {
                 message: 'All Fields are required'
             })
         }
-        const findUser = await User.findOne({ email: req.body.email }).select('+password');
+        const findUser = await User.findOne({ email: req.body.email }).select('+password')
+        console.log(!findUser);
         if (!findUser) {
             return res.status(401).json({
                 status: 'fail',
