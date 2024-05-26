@@ -12,14 +12,14 @@ export const signInUser = async (req, res) => {
             })
         }
         const isUserExist = await User.findOne({ username: req.body.username });
-        if (isUserExist.length !== 0) {
+        if (isUserExist) {
             return res.status(409).json({
                 status: 'fail',
                 message: 'User with this username already Exist'
             })
         }
         const useEmailExist = await User.findOne({ email: req.body.email });
-        if (useEmailExist.length !== 0) {
+        if (useEmailExist) {
             return res.status(400).json({
                 status: 'fail',
                 message: 'User with this email Exist'
@@ -38,6 +38,7 @@ export const signInUser = async (req, res) => {
             message: 'User Created'
         })
     } catch (error) {
+        console.log(error.message);
         res.status(500).json({
             status: 'fail',
             message: 'Problem while Creating a new user'
