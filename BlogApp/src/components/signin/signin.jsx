@@ -48,7 +48,6 @@ const Signin=()=>{
                 navigate('/login');
             },2000)
         } else if(response.status && response.status==='fail'){
-            setSignDetails(signUp);
             toastFail(response.message);
         }
     }
