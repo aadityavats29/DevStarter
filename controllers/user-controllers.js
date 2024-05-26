@@ -11,18 +11,16 @@ export const signInUser = async (req, res) => {
                 message: "All Fields are Required"
             })
         }
-        const isUserExist = await User.findOne({ username: req.body.username });
-        if (isUserExist) {
+        const existingUser = await User.findOne({
+            $or: [
+                { username: req.body.username },
+                { email: req.body.email }
+            ]
+        });
+        if (existingUser) {
             return res.status(409).json({
                 status: 'fail',
-                message: 'User with this username already Exist'
-            })
-        }
-        const useEmailExist = await User.findOne({ email: req.body.email });
-        if (useEmailExist) {
-            return res.status(400).json({
-                status: 'fail',
-                message: 'User with this email Exist'
+                message: 'Either username or Email already Exist'
             })
         }
         const HashesPass = await bcrypt.hash(req.body.password, 5);
