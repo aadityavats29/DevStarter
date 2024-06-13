@@ -37,7 +37,7 @@ export const LoginUser = async (data) => {
 export const signUser = async (data) => {
     try {
         const response = await axios.post(`${url}/signin`, data, {
-            timeout: 4000,
+            timeout: 5000,
         })
         console.log(response);
         if (response.status === 201) {

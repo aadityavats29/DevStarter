@@ -82,7 +82,7 @@ const Loginuser = async ()=>{
                                 <div className="absolute inset-y-0 start-0 flex items-center ps-2 cursor-pointer">
                                     <MailIcon className="text-gray-500" />
                                 </div>
-                                <input type="email" onChange={(e)=>{onInputChange(e)}} name='email' id="input-group-1" className=" border text-black border-gray-300 text-sm rounded-lg focus:outline-none block w-full ps-10 p-2.5 " placeholder="Enter Username" required />
+                                <input type="email" onChange={(e)=>{onInputChange(e)}} name='email' id="input-group-1" className=" border text-black border-gray-300 text-sm rounded-lg focus:outline-none block w-full ps-10 p-2.5 " placeholder="Enter Email" required />
                             </div>
                         </div>
                         {/* password Login FOrm  */}
