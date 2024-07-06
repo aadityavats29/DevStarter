@@ -130,8 +130,6 @@ const User = () => {
             });
             setTimeout(() => {
                 navigate('/');
-                localStorage.clear();
-                setAccount(false);
             }, 1000);
         } else if (response.status && response.status === 'fail') {
             toast.error(response.message, {

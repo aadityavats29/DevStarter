@@ -29,6 +29,7 @@ app.get("*",(req,res)=>{
 
 const username = process.env.DB_username;
 const password = process.env.DB_password;
+console.log(username,password);
 connectDB(username,password);
 
 app.listen(port,()=>{
