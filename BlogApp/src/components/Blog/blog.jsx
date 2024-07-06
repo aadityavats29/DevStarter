@@ -24,6 +24,8 @@ const Blog = () => {
         { label: 'Science and Nature' },
         { label: 'Health and Fitness' },
         { label: 'Food and Cooking' },
+        { label: 'Nature and Environment' },
+        { label: 'Science and Research' },
     ];
 
 

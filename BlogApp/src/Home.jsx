@@ -8,6 +8,8 @@ import CreateBlog from './components/createBlog/createBlog';
 import EditBlog from './components/editBlog/editBlog';
 import ReadBlog from './components/readBlog/ReadBlog';
 import User from './components/User/user';
+import About from './components/Intro/about';
+
 const PrivateRouteBlog = ()=>{
     return localStorage.getItem("userId") ?
     <>
@@ -43,6 +45,7 @@ const Home = ()=>{
                     <Route path='/user' element={<User/>} />
                 </Route>
                 <Route path='*' element={<Navigate replace to="/"/>}  />
+                <Route path='/about' element={<About/>}/>
             </Routes>
         </BrowserRouter>
     </>)

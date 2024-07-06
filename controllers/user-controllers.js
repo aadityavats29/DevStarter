@@ -143,7 +143,6 @@ export const deleteUser = async (req, res) => {
 
 export const UpdateUser = async (req, res) => {
     try {
-        console.log(req.body);
         const userId = req.params.userId;
         const { username, email } = req.body;
 

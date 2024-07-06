@@ -49,9 +49,11 @@ const CreateBlog = () => {
         { label: 'Business and Finance' },
         { label: 'Education and Learning' },
         { label: "Entertainment and Media" },
-        { label: 'Science and Nature' },
         { label: 'Health and Fitness' },
         { label: 'Food and Cooking' },
+        { label: 'Nature and Environment' },
+        { label: 'Science and Research' },
+        { label: 'Science and Nature' },
     ];
     useEffect(()=>{
         if (!selectedFile) return;
