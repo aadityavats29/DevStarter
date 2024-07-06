@@ -125,7 +125,7 @@ const User = () => {
     const updatingUser = async () => {
         const response = await UpdateUser(user);
         if (response.status && response.status === 'success') {
-            toast.success("Your Blog is Updated", {
+            toast.success("Your Blog is Updated ", {
                 position: 'top-center'
             });
             setTimeout(() => {
