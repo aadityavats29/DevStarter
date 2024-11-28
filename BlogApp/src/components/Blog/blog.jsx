@@ -16,16 +16,13 @@ const Blog = () => {
 
     const Category = [
         { label: 'All Latest Blog' },
-        { label: 'Technology and Gadgets' },
-        { label: 'Travel and Adventure' },
-        { label: 'Business and Finance' },
-        { label: 'Education and Learning' },
-        { label: "Entertainment and Media" },
-        { label: 'Science and Nature' },
-        { label: 'Health and Fitness' },
-        { label: 'Food and Cooking' },
-        { label: 'Nature and Environment' },
-        { label: 'Science and Research' },
+        { label: 'Others' },
+        { label: 'C++' },
+        { label: 'Python' },
+        { label: "Java" },
+        { label: 'Frontend' },
+        { label: 'Backend' },
+        { label: 'FullStack' },
     ];
 
 

@@ -1,6 +1,5 @@
 import { Grid, styled, Box } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useNavigate } from 'react-router-dom';
 
 const ChangeH2 = styled('h2')`
@@ -69,7 +68,6 @@ const ScrollTrack = styled(Box)`
 
 const Intro = () => {
     const navigate = useNavigate();
-    
 
     return (
         <>
@@ -78,11 +76,11 @@ const Intro = () => {
                 <Grid
                     style={{
                         minHeight: '100vh',
-                        height: '700px',
                         width: '100%',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        position: 'relative',
                     }}
                     item
                 >
@@ -106,43 +104,32 @@ const Intro = () => {
                             </ChangeH2>
                             <ChangeP>with DevStarter</ChangeP>
                         </AnimateGrid>
+                    </Box>
+                    {localStorage.getItem('userId') && (
                         <Box
+                            onClick={() => {
+                                navigate(`/blogs`);
+                            }}
                             style={{
-                                width: '100%',
-                                position: 'relative',
-                                bottom: '60px',
+                                width: '230px',
+                                borderRadius: '20px',
+                                color: 'white',
                                 display: 'flex',
                                 justifyContent: 'center',
                                 alignItems: 'center',
+                                height: '60px',
+                                backgroundColor: 'cyan',
+                                position: 'absolute', // Position the button
+                                bottom: '20px', // Move to the bottom of the viewport
+                                left: '50%', // Center horizontally
+                                transform: 'translateX(-50%)', // Adjust for centering
                             }}
                         >
-                            {localStorage.getItem('userId') && (
-                                <Box
-                                    onClick={() => {
-                                        navigate(`/blogs`);
-                                    }}
-                                    style={{
-                                        width: '230px',
-                                        borderRadius: '20px',
-                                        color: 'white',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        height: '60px',
-                                        backgroundColor: 'cyan',
-                                    }}
-                                >
-                                    <Box style={{ display: 'flex', fontSize: '20px', gap: '15px' }}>
-                                        <Box>Create Blogs</Box>
-                                        <ArrowForwardIcon style={{ fontSize: '25px' }} />
-                                    </Box>
-                                </Box>
-                            )}
+                            <Box style={{ fontSize: '20px' }}>Create Blogs</Box>
                         </Box>
-                    </Box>
+                    )}
                 </Grid>
             </Grid>
-            
         </>
     );
 };
