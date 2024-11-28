@@ -17,6 +17,7 @@
     "axios": "^1.6.8",
     "firebase": "^10.11.1",
     "html-react-parser": "^5.1.10",
+    "lets-blog2": "file:",
     "react": "^18.2.0",
     "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",

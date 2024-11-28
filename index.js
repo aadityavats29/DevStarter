@@ -5,9 +5,11 @@ import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import connectDB from './connection/connection.js';
+import nodemailer from "nodemailer";
 import path from 'path';
 import { fileURLToPath } from 'url';
 const app = express();
+
 
 dotenv.config();
 const port = process.env.PORT || 8092;
@@ -27,11 +29,15 @@ app.get("*",(req,res)=>{
     res.sendFile(path.resolve(__dirname,"BlogApp","dist","index.html"));
 });
 
+
 const username = process.env.DB_username;
-const password = process.env.DB_password;
-console.log(username,password);
-connectDB(username,password);
+console.log(username);
+
+connectDB();
+
+
 
 app.listen(port,()=>{
     console.log("Server is working");
 })
+

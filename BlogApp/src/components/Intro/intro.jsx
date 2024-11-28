@@ -117,13 +117,13 @@ const Intro = () => {
     const [username, setUsername] = useState('');
     const navigate = useNavigate();
     const openInstagram = () => {
-        window.open('https://www.instagram.com/dhruvseth18/', '_blank', 'noopener noreferrer');
+        window.open('https://www.instagram.com/_awkdityaa/profilecard/', '_blank', 'noopener noreferrer');
     };
     const openLinkedin = () => {
-        window.open('https://www.linkedin.com/in/dhruv-seth-871b64248/', '_blank', 'noopener noreferrer');
+        window.open('https://www.linkedin.com/in/aditya-vats-427635216/', '_blank', 'noopener noreferrer');
     }
     const openX = () => {
-        window.open('https://twitter.com/DhruvSeth_/', '_blank', 'noopener noreferrer');
+        window.open('https://x.com/Awkdityaa_', '_blank', 'noopener noreferrer');
     }
     return (
         <>
@@ -132,8 +132,8 @@ const Intro = () => {
                 <Grid style={{ minHeight: '100vh', height: '700px', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} item>
                     <Box style={{ maxWidth: { sm: '400px', xs: '350px' } }}>
                         <AnimateGrid style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                            <ChangeH2 sx={{ textAlign: 'center', fontSize: { xs: '50px', sm: '65px' },fontWeight:'bold' }} >Schedule Your Progress</ChangeH2>
-                            <ChangeP>Created by Dhruv Seth</ChangeP>
+                            <ChangeH2 sx={{ textAlign: 'center', fontSize: { xs: '50px', sm: '65px' },fontWeight:'bold' }} >Kickstart your DevJourney Today!</ChangeH2>
+                            <ChangeP>with DevStarter</ChangeP>
                         </AnimateGrid>
                         <Box style={{ width: '100%',position:"relative",bottom:"60px", display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             {

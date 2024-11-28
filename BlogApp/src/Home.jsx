@@ -9,6 +9,7 @@ import EditBlog from './components/editBlog/editBlog';
 import ReadBlog from './components/readBlog/ReadBlog';
 import User from './components/User/user';
 import About from './components/Intro/about';
+import Contact from './components/Intro/contact';
 
 const PrivateRouteBlog = ()=>{
     return localStorage.getItem("userId") ?
@@ -46,6 +47,7 @@ const Home = ()=>{
                 </Route>
                 <Route path='*' element={<Navigate replace to="/"/>}  />
                 <Route path='/about' element={<About/>}/>
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </BrowserRouter>
     </>)
