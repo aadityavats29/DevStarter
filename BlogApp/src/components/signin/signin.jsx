@@ -95,7 +95,7 @@ const Signin=()=>{
                         {/* Forgot password */}
                         <div className="flex w-full justify-between mb-3 pt-2 pb-2">
                             <p onClick={()=>navigate('/login')} className="text-white cursor-pointer">Alerady have a account ?</p>
-                            <p className="text-blue-500 cursor-pointer">Forgot Password ?</p>
+                            
                         </div>
                         {/* Button Login */}
                         <div className="flex justify-center mb-3">
@@ -103,10 +103,7 @@ const Signin=()=>{
                         </div>
                         {/* Login with Google    */}
                         <div className="flex w-full justify-center ">
-                            <button className="w-full h-[35px] border-2 border-black justify-center text-black bg-white flex gap-4 rounded-md">
-                                <img className=" h-full " src={Google} alt="google image" />
-                                <p className="flex h-full items-center font-bold">Sign in with Google</p>
-                            </button>
+                            
                         </div>
                     </div>
                     
