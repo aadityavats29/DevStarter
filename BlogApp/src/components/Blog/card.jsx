@@ -66,7 +66,7 @@ const Blogcard = ({ item }) => {
                 </div>
                 <div className='m-2 mt-2'>
                     <p className='text-[19px] h-[60px] mb-1 overflow-hidden'>{item.title}</p>
-                    <p className='text-[14px]'>{item.description.substring(0, 120)}?&nbsp;....</p>
+                    <p className='text-[14px]'>{item.description.substring(0, 120)}&nbsp;....</p>
                 </div>
             </div>
             <div className='flex justify-around w-[70px] absolute bottom-3 left-[7px]'>

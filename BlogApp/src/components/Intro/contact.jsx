@@ -80,7 +80,7 @@ const ContactUs = () => {
             }}
         >
             <FadeInBox>
-                <ChangeH2>Follow Us on Social Media</ChangeH2>
+                <ChangeH2>Contact Us on Social Media</ChangeH2>
                 <SocialButton>
                     <SocialIcon>
                         <InstagramIcon fontSize="large" onClick={openInstagram} />
