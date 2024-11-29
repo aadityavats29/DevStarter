@@ -48,11 +48,11 @@ const Login = () => {
         return emailRegex.test(email);
     }
 
-    const validatePassword = (password) => {
-        // Password must have at least one number, one letter, and be at least 6 characters long
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-        return passwordRegex.test(password);
-    }
+    // const validatePassword = (password) => {
+    //     // Password must have at least one number, one letter, and be at least 6 characters long
+    //     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    //     return passwordRegex.test(password);
+    // }
 
     const Loginuser = async () => {
         const { email, password } = login;
@@ -62,10 +62,10 @@ const Login = () => {
             return;
         }
 
-        if (!validatePassword(password)) {
-            toastFail("Password must be at least 6 characters long and contain at least one letter and one number.");
-            return;
-        }
+        // if (!validatePassword(password)) {
+        //     toastFail("Password must be at least 6 characters long and contain at least one letter and one number.");
+        //     return;
+        // }
 
         const response = await LoginUser(login);
         if (response.status && response.status === 'success') {
