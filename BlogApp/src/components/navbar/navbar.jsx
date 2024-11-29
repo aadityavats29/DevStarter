@@ -62,8 +62,11 @@ const Navbar = () => {
     return (
         <>
             <Box sx={{ display: 'flex' }}>
-                <AppBar position="fixed" sx={{ width: '100%' }} >
-                    <EditToolbar className='bg-black' position='fixed' sx={{ height: { xs: '65px' } }}>
+                <AppBar position="fixed" sx={{ width: '100%' }}  className='mt-3'>
+                    <EditToolbar className='bg-black ' position='fixed' sx={{ height: { xs: '65px' } }}>
+                        <img src='https://demos.onepagelove.com/html/devbook/assets/images/site-logo.svg'
+                             className="absolute btn left-[7px] md:right-[30px]"
+                        />
                         <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ display: { sm: 'none' }, position: 'absolute', left: '5vh', scale: '1.4' }} >
                             <MenuIcon />
                         </IconButton>

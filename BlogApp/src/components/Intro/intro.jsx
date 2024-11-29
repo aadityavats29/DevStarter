@@ -1,10 +1,20 @@
 import { Grid, styled, Box } from '@mui/material';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useNavigate } from 'react-router-dom';
+import { FaFileCode } from "react-icons/fa";
+import { FaJs } from "react-icons/fa";
+import { FaAngular } from "react-icons/fa";
+import { FaCodeBranch } from "react-icons/fa";
+import { BiSolidDonateHeart } from "react-icons/bi";
+
+
+
+
 
 const ChangeH2 = styled('h2')`
     color: white;
-    font-size: 55px;
+    font-size: 65px;
+    margin-bottom:0px;
     background-image: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
     background-clip: text;
     color: transparent;
@@ -21,6 +31,7 @@ const ChangeP = styled('p')`
 
 const AnimateGrid = styled(Box)`
     min-width: 380px;
+    max-width:100%;
     animation: fadeInFromBottom 1s forwards;
     position: relative;
     @keyframes fadeInFromBottom {
@@ -72,7 +83,9 @@ const Intro = () => {
     return (
         <>
             <ScrollTrack sx={{ top: { sm: '64px', xs: '56px' }, zIndex: '3' }}></ScrollTrack>
-            <Grid container style={{ backgroundColor: 'black' }}>
+            <Grid 
+            className='flex justify-center items-center'
+            container style={{ backgroundColor: 'black' }}>
                 <Grid
                     style={{
                         minHeight: '100vh',
@@ -84,18 +97,22 @@ const Intro = () => {
                     }}
                     item
                 >
-                    <Box style={{ maxWidth: { sm: '400px', xs: '350px' } }}>
+                    {/* <Box 
+                    className='border border-yellow-600 flex justify-between overflow-hidden'
+                    style={{ maxWidth: { sm: '400px', xs: '350px' } }}>
+                    <div className='flex border border-white '>
+
                         <AnimateGrid
                             style={{
                                 display: 'flex',
                                 flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
+                                // justifyContent: 'center',
+                                // alignItems: 'center',
                             }}
                         >
                             <ChangeH2
                                 sx={{
-                                    textAlign: 'center',
+                                    // textAlign: 'center',
                                     fontSize: { xs: '50px', sm: '65px' },
                                     fontWeight: 'bold',
                                 }}
@@ -104,7 +121,39 @@ const Intro = () => {
                             </ChangeH2>
                             <ChangeP>with DevStarter</ChangeP>
                         </AnimateGrid>
-                    </Box>
+                            {/* <div className='text-wrap flex flex-row'>
+                                lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 lorem30 
+                            </div> 
+
+                    </div>
+                        <img src='pngegg.png' className='h-13 w-13'/>
+
+
+                    </Box> */}
+
+
+                <div className='flex justify-center items-center flex-col '>
+                    <div >
+                    <AnimateGrid>
+                        <ChangeH2 >
+                        Kickstart Your Journey Today!
+                        </ChangeH2>
+                    </AnimateGrid>
+                    </div>
+                    <AnimateGrid>
+                        <div className='text-3xl  text-center w-3/4 ml-64'>
+                        DevStarter is a platform designed to empower fresh developers by providing a curated collection of DIY project ideas, resources, and tools to enhance their coding skills and portfolio.
+                        </div>
+                    {/* <div className='w-[100%]'>
+                        <img src='pngegg.png' className='h-13 w-13 border border-white w-[100%] absolute' />
+                    </div> */}
+                    </AnimateGrid>
+                </div>
+
+
+
+              
+
                     {localStorage.getItem('userId') && (
                         <Box
                             onClick={() => {
@@ -129,6 +178,24 @@ const Intro = () => {
                         </Box>
                     )}
                 </Grid>
+                {/* <div className='w-[100%] flex-col items-center'>
+                    <div className='border flex justify-center'>
+                    What will YOu get from Our website
+                    </div>
+                    <div className='flex justify-between items-center border w-5/6'>
+                        <div>
+                        <FaFileCode />
+                        </div>
+                        <div>
+                        <FaJs />
+                        </div>
+                        <div>
+                        <FaFileCode />
+                        </div>
+                    </div>
+
+                </div> */}
+
             </Grid>
         </>
     );
