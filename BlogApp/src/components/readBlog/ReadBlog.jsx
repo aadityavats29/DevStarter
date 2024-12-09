@@ -9,9 +9,10 @@ import { Avatar } from "@mui/material";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 import './readBlog.css';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ReadBlog = () => {
     const [details, setDetails] = useState({});
@@ -24,23 +25,10 @@ const ReadBlog = () => {
     const { blogId } = useParams();
     const navigate = useNavigate();
 
-    const toastSuccess = () => {
-        toast.success("User Login Successful", {
-            position: 'top-center',
-            className: "toast"
-        });
-    }
-    const toastFail = (message) => {
-        toast.error(message, {
-            position: 'top-center',
-            className: "toast"
-        });
-    }
-
     useEffect(() => {
         const BlogDetails = async () => {
             const response = await getSingleBlog(blogId);
-            if (response.status && response.status === 'success') {
+            if (response.status && response.status === "success") {
                 setDetails(response.Blog);
                 setLikeCount(response.Blog.totalLikes);
             }
@@ -51,46 +39,41 @@ const ReadBlog = () => {
     useEffect(() => {
         const checkForLike = async () => {
             const response = await checkLike(blogId);
-            if (response.status && response.status === 'success') {
+            if (response.status && response.status === "success") {
                 setLike(true);
             }
         };
         const checkForBookmark = async () => {
             const response = await checkBookmark(blogId);
-            if (response.status && response.status === 'success') {
+            if (response.status && response.status === "success") {
                 setBookMark(true);
             }
         };
         checkForBookmark();
         checkForLike();
-    }, []);
+    }, [blogId]);
 
     const copyUrl = async () => {
         setShare(!share);
         const url = window.location.href;
         await navigator.clipboard.writeText(url);
-        toast.success('URL copied to clipboard!', {
+        toast.success("URL copied to clipboard!", {
             position: "top-center",
             autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            className: 'custom-toast'
+            className: "custom-toast",
         });
     };
 
     const ApplyBookmark = async () => {
         const response = await Bookmark(blogId);
-        if (response.status && response.status === 'success') {
+        if (response.status && response.status === "success") {
             setBookMark(response.bookmark);
         }
     };
 
     const likeOrDislike = async () => {
         const response = await LikeBlog(blogId, details.author._id);
-        setLikeCount(prev => response.likedBlog ? prev + 1 : prev - 1);
+        setLikeCount((prev) => (response.likedBlog ? prev + 1 : prev - 1));
         setLike(response.likedBlog);
     };
 
@@ -101,9 +84,9 @@ const ReadBlog = () => {
     const handlePayment = async () => {
         const stripe = await loadStripe("pk_test_51QU5IFKSY4fJwSPCG6HxueOoLO5FKMaqAD9L4P9vju3fTCWNf1Jstzpqp1cf3plOLXnEilMy7P9elSoOVXGXnU4200X8vZVyYy");
 
-        const response = await fetch('http://localhost:8092/create-checkout-session', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+        const response = await fetch("http://localhost:8092/create-checkout-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ amount: parseInt(donationAmount) * 100 }),
         });
 
@@ -112,7 +95,7 @@ const ReadBlog = () => {
             const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
             if (error) console.error("Payment error:", error.message);
         } else {
-            console.error('Failed to create checkout session');
+            console.error("Failed to create checkout session");
         }
 
         setDialogOpen(false);
@@ -123,42 +106,52 @@ const ReadBlog = () => {
             <div className="w-[100%] mt-[75px] mb-[100px] flex justify-center">
                 <div className="w-[95%] sm:w-[80%] lg:w-[60%] xl:w-[50%] flex flex-col gap-1">
                     <div>
-                        {details.image && <img className="w-[100%] h-[320px] lg:h-[360px] select-none" src={details.image} alt="#image" />}
+                        {details.image && (
+                            <img className="w-[100%] h-[320px] lg:h-[360px] select-none" src={details.image} alt="Blog" />
+                        )}
                     </div>
                     <div className="flex gap-1 mt-3 relative">
                         {like ? (
-                            <AiFillHeart onClick={likeOrDislike} className='text-[34px] active:scale-75 text-red-500 cursor-pointer' />
+                            <AiFillHeart onClick={likeOrDislike} className="text-[34px] active:scale-75 text-red-500 cursor-pointer" />
                         ) : (
-                            <AiOutlineHeart onClick={likeOrDislike} className='text-[34px] active:scale-75 cursor-pointer' />
+                            <AiOutlineHeart onClick={likeOrDislike} className="text-[34px] active:scale-75 cursor-pointer" />
                         )}
                         <p className="text-[27px] font-normal relative bottom-1 mr-1">{likeCount}</p>
-                        <FaShareAlt onClick={copyUrl} className={`text-[25px] relative mt-[3.5px] transition duration-200 cursor-pointer ${share ? 'text-blue-500' : ''}`} />
-                        {details.author && localStorage.getItem('userId') === details.author._id ? (
-                            <button className="button absolute right-4" onClick={ReDirect}>Edit</button>
+                        <FaShareAlt onClick={copyUrl} className={`text-[25px] relative mt-[3.5px] cursor-pointer ${share ? "text-blue-500" : ""}`} />
+                        {details.author && localStorage.getItem("userId") === details.author._id ? (
+                            <button
+                                onClick={ReDirect}
+                                style={{
+                                    backgroundColor: "#f0f0f0",
+                                    borderRadius: "50%",
+                                    padding: "8px",
+                                    width: "40px",
+                                    height: "40px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    cursor: "pointer",
+                                    border: "none",
+                                    position: "absolute",
+                                    right: "4px",
+                                }}
+                            >
+                                <EditIcon style={{ fontSize: "20px", color: "#555" }} />
+                            </button>
                         ) : (
                             <div className="absolute right-1">
                                 {bookmark ? (
-                                    <IoBookmark onClick={ApplyBookmark} className='text-[32px] active:scale-75 text-red-500 cursor-pointer' />
+                                    <IoBookmark onClick={ApplyBookmark} className="text-[32px] active:scale-75 text-red-500 cursor-pointer" />
                                 ) : (
-                                    <IoBookmarkOutline onClick={ApplyBookmark} className='text-[32px] active:scale-75 cursor-pointer' />
+                                    <IoBookmarkOutline onClick={ApplyBookmark} className="text-[32px] active:scale-75 cursor-pointer" />
                                 )}
                             </div>
                         )}
                     </div>
                     <div className="w-[100%] flex justify-center mb-[40px]">
-                        {details.title && <p className="md:w-[750px] text-[30px] md:text-[60px] text-center font-medium">{details.title}</p>}
-                    </div>
-                    <div className="flex justify-center gap-1 w-[100%] mb-10">
-                        <div className="flex gap-9">
-                            {details.author && <Avatar sx={{ height: '70px', width: '70px' }} alt={details.author.username} src={details.author.image} />}
-                            <div className="flex flex-col">
-                                {details.author && <p className="text-[30px]">{details.author.username}</p>}
-                                <div className="flex gap-3">
-                                    {details.author && <p>Total Posts: {details.author.totalPost}</p>}
-                                    {details.author && <p>Total Likes: {details.author.totalLikes}</p>}
-                                </div>
-                            </div>
-                        </div>
+                        {details.title && (
+                            <p className="md:w-[750px] text-[30px] md:text-[60px] text-center font-medium">{details.title}</p>
+                        )}
                     </div>
                     <div className="flex justify-center">
                         <button onClick={() => setDialogOpen(true)} className="bg-blue-500 text-white py-2 px-6 rounded-full text-lg">
@@ -171,7 +164,9 @@ const ReadBlog = () => {
                         <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]"></span>
                     </div>
                     <div className="w-[100%]">
-                        {details.data && <div className="blogPage w-[100%]" dangerouslySetInnerHTML={{ __html: details.data }}></div>}
+                        {details.data && (
+                            <div className="blogPage w-[100%]" dangerouslySetInnerHTML={{ __html: details.data }}></div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -194,6 +189,7 @@ const ReadBlog = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <ToastContainer />
         </>
     );
 };
