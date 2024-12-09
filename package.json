@@ -11,6 +11,7 @@
   "author": "aditya",
   "license": "ISC",
   "dependencies": {
+    "@stripe/stripe-js": "^5.2.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -22,6 +23,7 @@
     "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
     "path": "^0.12.7",
-    "server": "file:"
+    "server": "file:",
+    "stripe": "^17.4.0"
   }
 }

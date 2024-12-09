@@ -44,6 +44,13 @@
 
 
 
+.icon {
+    transition: transform 0.2s, color 0.2s;
+}
+.icon:hover {
+    transform: scale(1.1);
+    color: #007bff; /* Add your desired hover color */
+}
 
 
 .bin-button {
