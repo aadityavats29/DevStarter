@@ -61,9 +61,9 @@ const Navbar = () => {
     };
     return (
         <>
-            <Box sx={{ display: 'flex' }}>
-                <AppBar position="fixed" sx={{ width: '100%' }}  className='mt-3'>
-                    <EditToolbar className='bg-black ' position='fixed' sx={{ height: { xs: '65px' } }}>
+            <Box sx={{ display: 'flex' , flexDirection:'col' }}>
+                <AppBar position="fixed" sx={{ width: '100%',background:'#141417' }}  className=''>
+                    <EditToolbar className='' position='fixed' sx={{ height: { xs: '65px' } }}>
                         <img src='https://demos.onepagelove.com/html/devbook/assets/images/site-logo.svg'
                              className="absolute btn left-[7px] md:right-[30px]"
                         />

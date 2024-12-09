@@ -52,21 +52,30 @@ const Blogcard = ({ item }) => {
     };
 
     return (
-        <Card
-            sx={{ borderRadius: '7px' }}
-            className='min-w-[300px] max-w-[350px] relative h-[400px] text-black border-2 bg-white'
+        <Card 
+        className = "min-w-[100px] max-w-[80%] relative h-[400px]  border border-1 border-gray-700 bg-gray-500"
+            sx={{
+    borderRadius: '7px',
+    backgroundColor: 'black', // semi-transparent black background (to show the blur effect behind)
+    // border: '1px dashed grey',
+    color: 'white', // make text white to contrast with the dark background
+    backdropFilter: 'blur(10px)', // Apply blur effect to the area behind the card
+    WebkitBackdropFilter: 'blur(10px)', // Ensure it works on Safari
+    border: '2px solid rgba(255, 255, 255, 0.2)'
+  }}
+  
         >
-            <div onClick={openBlogPage} className='cursor-pointer'>
-                <p className='m-2'>{item.category}</p>
+            <div onClick={openBlogPage} className='cursor-pointer '>
+                <p className='mt-2 mb-3 flex justify-center font-semibold font-l'>{item.category}</p>
                 <div className='flex justify-center'>
                     <img
                         className='w-[100%] h-[160px] rounded-lg ml-3 mr-3 border-2'
                         src={item.image}
                     />
                 </div>
-                <div className='m-2 mt-2'>
-                    <p className='text-[19px] h-[60px] mb-1 overflow-hidden'>{item.title}</p>
-                    <p className='text-[14px]'>{item.description.substring(0, 120)}&nbsp;....</p>
+                <div className='m-2 mt-2 text-center border-1 '>
+                    <p className='text-2xl h-[60px] mb-1 font-bold'>{item.title}</p>
+                    <p className='text-l mt-6 h-15 overflow-hidden'>{item.description.substring(0, 120)}&nbsp;....</p>
                 </div>
             </div>
             <div className='flex justify-around w-[70px] absolute bottom-3 left-[7px]'>

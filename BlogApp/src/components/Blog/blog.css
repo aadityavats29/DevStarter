@@ -6,7 +6,7 @@
     letter-spacing: 0.05em;
     border-radius: 0.5em;
     cursor: pointer;
-    border: 1.5px solid white;
+    border: 1.5px solid rgb(94, 94, 94);
     background: linear-gradient(to right, #8e2de2, #4a00e0);
     color: ghostwhite;
     overflow: hidden;
