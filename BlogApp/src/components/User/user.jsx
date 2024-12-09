@@ -162,6 +162,9 @@ const User = () => {
                             <div className="absolute inset-y-0 start-0 flex items-center ps-2 cursor-pointer">
                                 <FaUser className=" text-[22px] text-gray-500" />
                             </div>
+
+                            {/* yaha dalra hai */}
+                            
                             <input value={user.username} onChange={(e) => onInputChange(e)} type="text" name='username' id="input-group-1" className=" border text-black border-gray-300 text-lg rounded-lg focus:outline-none block w-full ps-10 p-2.5 " placeholder="Enter Username" required />
                         </div>
                     </div>

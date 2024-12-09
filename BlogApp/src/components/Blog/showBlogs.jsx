@@ -9,7 +9,7 @@ const CardContainer = styled(Box)`
     height:100%;
     padding:15px;
     gap:25px;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto;
     @media (max-width: 1600px) {
         grid-template-columns: auto auto auto auto;
     }

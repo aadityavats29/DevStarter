@@ -11,6 +11,9 @@ import { Avatar } from "@mui/material";
 import { checkLike, LikeBlog, Bookmark, checkBookmark } from "../api/api";
 import { useNavigate } from "react-router-dom";
 import './readBlog.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ReadBlog = () => {
     const [details, setDetails] = useState({});
@@ -21,6 +24,24 @@ const ReadBlog = () => {
     const [likeCount,setLikeCount] = useState(0);
     const [clickLike,setClickike] = useState(true);
     const navigate = useNavigate();
+
+
+
+    const toastSuccess = () => {
+        toast.success("User Login Successful", {
+            position: 'top-center',
+            className: "toast"
+        });
+    }
+    const toastFail = (message) => {
+        toast.error(message, {
+            position: 'top-center',
+            className: "toast"
+        });
+    }
+
+
+
 
     useEffect(() => {
         const BlogDetails = async () => {
@@ -56,6 +77,16 @@ const ReadBlog = () => {
         setShare(!share);
         const url = window.location.href;
         await navigator.clipboard.writeText(url);
+        toast.success('URL copied to clipboard!', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            className: 'custom-toast'});
+
     }
     const ApplyBookmark = async () => {
         const response = await Bookmark(blogId);
@@ -80,7 +111,9 @@ const ReadBlog = () => {
     
     
 
-    return (<>
+    return (
+        <>
+        {/* <ToastContainer style={{ scale: '0.95', paddingTop: '60px' }}/> */}
         <div className="w-[100%] mt-[75px] mb-[100px] flex justify-center">
             <div className="w-[95%] sm:w-[80%] lg:w-[60%] xl:w-[50%] flex flex-col gap-1">
                 <div>
@@ -102,7 +135,13 @@ const ReadBlog = () => {
                         />
                     )}
                     {details.title && <p className="text-[27px] font-normal relative bottom-1 mr-1">{likeCount}</p>}
+
+                    <div>
                     <FaShareAlt onClick={copyUrl} className={`text-[25px] relative mt-[3.5px] transition duration-200 cursor-pointer ${share ? 'text-blue-500' : ''}`} />
+                    <ToastContainer />
+                    </div>
+
+
                     {
                         details.author && localStorage.getItem('userId') === details.author._id ?
                             <>

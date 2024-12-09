@@ -60,6 +60,9 @@ const LoginButton = () => {
                         <div className='absolute right-[20px] md:right-[40px] top-3 gap-2 flex cursor-pointer' >
                             <div onClick={handleClick} className='flex gap-2'>
                                 <img  className='w-[45px] h-[45px] relative rounded-full ring-gray-300 dark:ring-gray-500' src={localStorage.getItem('userImage') || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBQLZBLliHC0oAh1vMfI7Z5IzTV8_RlzVeh6QqSzs_SCqn5a0rkuXEoVsuDPNxMntF0vc&usqp=CAU'} />
+
+                                {/* yaha change hona hai */}
+                                
                                 <p className='relative top-[8px] hidden md:block text-lg'>{localStorage.getItem('username')}</p>
                             </div>
                             <StyledMenu sx={{ display: 'flex', flexDirection: 'column' }} id="basic-menu" MenuListProps={{ 'aria-labelledby': 'basic-button' }} anchorEl={anchorEl} open={open} onClose={handleClose} >
