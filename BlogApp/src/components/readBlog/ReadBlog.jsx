@@ -6,13 +6,12 @@ import { FaShareAlt } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import { Avatar } from "@mui/material";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Backdrop, RadioGroup, FormControlLabel, Radio } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
 import './readBlog.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const ReadBlog = () => {
     const [details, setDetails] = useState({});
@@ -24,8 +23,6 @@ const ReadBlog = () => {
     const [donationAmount, setDonationAmount] = useState("5");
     const { blogId } = useParams();
     const navigate = useNavigate();
-
-
 
     const toastSuccess = () => {
         toast.success("User Login Successful", {
@@ -39,9 +36,6 @@ const ReadBlog = () => {
             className: "toast"
         });
     }
-
-
-
 
     useEffect(() => {
         const BlogDetails = async () => {
@@ -75,8 +69,6 @@ const ReadBlog = () => {
         setShare(!share);
         const url = window.location.href;
         await navigator.clipboard.writeText(url);
-    };
-
         toast.success('URL copied to clipboard!', {
             position: "top-center",
             autoClose: 1000,
@@ -85,9 +77,10 @@ const ReadBlog = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            className: 'custom-toast'});
+            className: 'custom-toast'
+        });
+    };
 
-    }
     const ApplyBookmark = async () => {
         const response = await Bookmark(blogId);
         if (response.status && response.status === 'success') {
@@ -144,55 +137,6 @@ const ReadBlog = () => {
                             <button className="button absolute right-4" onClick={ReDirect}>Edit</button>
                         ) : (
                             <div className="absolute right-1">
-    }
-    
-    
-
-    return (
-        <>
-        {/* <ToastContainer style={{ scale: '0.95', paddingTop: '60px' }}/> */}
-        <div className="w-[100%] mt-[75px] mb-[100px] flex justify-center">
-            <div className="w-[95%] sm:w-[80%] lg:w-[60%] xl:w-[50%] flex flex-col gap-1">
-                <div>
-                    {details.image && <img className="w-[100%] h-[320px] lg:h-[360px] select-none" src={details.image} alt="#image" />}
-                </div>
-                <div>
-                    
-                </div>
-                <div className="flex gap-1 mt-3 relative">
-                    {like ? (
-                        <AiFillHeart
-                            onClick={likeOrDislike}
-                            className='text-[34px] active:scale-75 text-red-500 cursor-pointer'
-                        />
-                    ) : (
-                        <AiOutlineHeart
-                            onClick={likeOrDislike}
-                            className='text-[34px] active:scale-75 cursor-pointer'
-                        />
-                    )}
-                    {details.title && <p className="text-[27px] font-normal relative bottom-1 mr-1">{likeCount}</p>}
-
-                    <div>
-                    <FaShareAlt onClick={copyUrl} className={`text-[25px] relative mt-[3.5px] transition duration-200 cursor-pointer ${share ? 'text-blue-500' : ''}`} />
-                    <ToastContainer />
-                    </div>
-
-
-                    {
-                        details.author && localStorage.getItem('userId') === details.author._id ?
-                            <>
-                                <div className="absolute right-[4px] md:right-[6px] bottom-[3px]">
-                                    <div className="flex gap-3">
-                                        <button className="button" onClick={ReDirect}>
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Edit
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </> :
-                            <>
                                 {bookmark ? (
                                     <IoBookmark onClick={ApplyBookmark} className='text-[32px] active:scale-75 text-red-500 cursor-pointer' />
                                 ) : (
@@ -201,11 +145,9 @@ const ReadBlog = () => {
                             </div>
                         )}
                     </div>
-
                     <div className="w-[100%] flex justify-center mb-[40px]">
                         {details.title && <p className="md:w-[750px] text-[30px] md:text-[60px] text-center font-medium">{details.title}</p>}
                     </div>
-
                     <div className="flex justify-center gap-1 w-[100%] mb-10">
                         <div className="flex gap-9">
                             {details.author && <Avatar sx={{ height: '70px', width: '70px' }} alt={details.author.username} src={details.author.image} />}
@@ -218,14 +160,12 @@ const ReadBlog = () => {
                             </div>
                         </div>
                     </div>
-
                     <div className="flex justify-center">
                         <button onClick={() => setDialogOpen(true)} className="bg-blue-500 text-white py-2 px-6 rounded-full text-lg">
                             Donate Now
                         </button>
                     </div>
-
-                    <div className="width-[100%]] flex">
+                    <div className="width-[100%] flex">
                         <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]"></span>
                         <p className="mr-4 ml-4 text-[40px]">Content</p>
                         <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]"></span>
@@ -236,7 +176,6 @@ const ReadBlog = () => {
                 </div>
             </div>
 
-            {/* Donation Dialog */}
             <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
                 <DialogTitle>Choose Donation Amount</DialogTitle>
                 <DialogContent>

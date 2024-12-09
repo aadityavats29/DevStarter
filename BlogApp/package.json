@@ -17,6 +17,7 @@
     "@stripe/stripe-js": "^5.2.0",
     "axios": "^1.6.8",
     "firebase": "^10.11.1",
+    "gsap": "^3.12.5",
     "html-react-parser": "^5.1.10",
     "lets-blog2": "file:",
     "react": "^18.2.0",
