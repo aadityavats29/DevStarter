@@ -1,14 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleBlog } from "../api/api";
+import { getSingleBlog, checkLike, LikeBlog, Bookmark, checkBookmark } from "../api/api";
 import { FaShareAlt } from "react-icons/fa";
-import { AiFillHeart } from "react-icons/ai";
-import { AiOutlineHeart } from "react-icons/ai";
-import { IoBookmark } from "react-icons/io5";
-import { IoBookmarkOutline } from "react-icons/io5";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { IoBookmark, IoBookmarkOutline } from "react-icons/io5";
 import { Avatar } from "@mui/material";
-import { checkLike, LikeBlog, Bookmark, checkBookmark } from "../api/api";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Backdrop, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
 import './readBlog.css';
@@ -18,9 +16,10 @@ const ReadBlog = () => {
     const [share, setShare] = useState(false);
     const [like, setLike] = useState(false);
     const [bookmark, setBookMark] = useState(false);
-    const { blogId } = useParams();
     const [likeCount, setLikeCount] = useState(0);
-    const [clickLike, setClickike] = useState(true);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [donationAmount, setDonationAmount] = useState("5");
+    const { blogId } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,16 +38,15 @@ const ReadBlog = () => {
             const response = await checkLike(blogId);
             if (response.status && response.status === 'success') {
                 setLike(true);
-                setClickike(false);
             }
         };
-        const checkForBookmart = async () => {
+        const checkForBookmark = async () => {
             const response = await checkBookmark(blogId);
             if (response.status && response.status === 'success') {
                 setBookMark(true);
             }
         };
-        checkForBookmart();
+        checkForBookmark();
         checkForLike();
     }, []);
 
@@ -67,41 +65,32 @@ const ReadBlog = () => {
 
     const likeOrDislike = async () => {
         const response = await LikeBlog(blogId, details.author._id);
-        setClickike(!clickLike);
-        clickLike ? setLikeCount(likeCount + 1) : setLikeCount(likeCount - 1);
-        if (likeCount < 0) {
-            setLikeCount(0);
-        }
-        if (response.status && response.status === 'success') {
-            setLike(response.likedBlog);
-        }
+        setLikeCount(prev => response.likedBlog ? prev + 1 : prev - 1);
+        setLike(response.likedBlog);
     };
 
     const ReDirect = () => {
         navigate(`/editblog/${details._id}`);
     };
 
-    const makePayment = async () => {
+    const handlePayment = async () => {
         const stripe = await loadStripe("pk_test_51QU5IFKSY4fJwSPCG6HxueOoLO5FKMaqAD9L4P9vju3fTCWNf1Jstzpqp1cf3plOLXnEilMy7P9elSoOVXGXnU4200X8vZVyYy");
-    
-        // Fetch the checkout session ID from your server
+
         const response = await fetch('http://localhost:8092/create-checkout-session', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: parseInt(donationAmount) * 100 }),
         });
-    
+
         if (response.ok) {
-            const session = await response.json(); 
-    
-            const { error } = await stripe.redirectToCheckout({
-                sessionId: session.id,
-            });
-    
-            if (error) {
-                console.error("Payment error:", error.message);
-            }
+            const session = await response.json();
+            const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+            if (error) console.error("Payment error:", error.message);
         } else {
             console.error('Failed to create checkout session');
         }
+
+        setDialogOpen(false);
     };
 
     return (
@@ -113,50 +102,27 @@ const ReadBlog = () => {
                     </div>
                     <div className="flex gap-1 mt-3 relative">
                         {like ? (
-                            <AiFillHeart
-                                onClick={likeOrDislike}
-                                className='text-[34px] active:scale-75 text-red-500 cursor-pointer'
-                            />
+                            <AiFillHeart onClick={likeOrDislike} className='text-[34px] active:scale-75 text-red-500 cursor-pointer' />
                         ) : (
-                            <AiOutlineHeart
-                                onClick={likeOrDislike}
-                                className='text-[34px] active:scale-75 cursor-pointer'
-                            />
+                            <AiOutlineHeart onClick={likeOrDislike} className='text-[34px] active:scale-75 cursor-pointer' />
                         )}
                         <p className="text-[27px] font-normal relative bottom-1 mr-1">{likeCount}</p>
                         <FaShareAlt onClick={copyUrl} className={`text-[25px] relative mt-[3.5px] transition duration-200 cursor-pointer ${share ? 'text-blue-500' : ''}`} />
                         {details.author && localStorage.getItem('userId') === details.author._id ? (
-                            <div className="absolute right-[4px] md:right-[6px] bottom-[3px]">
-                                <div className="flex gap-3">
-                                    <button className="button" onClick={ReDirect}>
-                                        <span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                                <path fill="none" d="M0 0h24v24H0z"></path>
-                                                <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
-                                            </svg> Edit
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+                            <button className="button absolute right-4" onClick={ReDirect}>Edit</button>
                         ) : (
                             <div className="absolute right-1">
                                 {bookmark ? (
-                                    <IoBookmark
-                                        onClick={ApplyBookmark}
-                                        className='text-[32px] active:scale-75 text-red-500 cursor-pointer'
-                                    />
+                                    <IoBookmark onClick={ApplyBookmark} className='text-[32px] active:scale-75 text-red-500 cursor-pointer' />
                                 ) : (
-                                    <IoBookmarkOutline
-                                        onClick={ApplyBookmark}
-                                        className='text-[32px] active:scale-75 cursor-pointer'
-                                    />
+                                    <IoBookmarkOutline onClick={ApplyBookmark} className='text-[32px] active:scale-75 cursor-pointer' />
                                 )}
                             </div>
                         )}
                     </div>
 
                     <div className="w-[100%] flex justify-center mb-[40px]">
-                        {details.title && <p className="md:w-[750px] text-[30px] md:text-[60px] text-center font-medium">{details.title.substring(0, 90)}</p>}
+                        {details.title && <p className="md:w-[750px] text-[30px] md:text-[60px] text-center font-medium">{details.title}</p>}
                     </div>
 
                     <div className="flex justify-center gap-1 w-[100%] mb-10">
@@ -165,20 +131,15 @@ const ReadBlog = () => {
                             <div className="flex flex-col">
                                 {details.author && <p className="text-[30px]">{details.author.username}</p>}
                                 <div className="flex gap-3">
-                                    <div>
-                                        {details.author && <p className="flex-1 text-[14px]">Total Post : {details.author.totalPost}</p>}
-                                    </div>
-                                    <div>
-                                        {details.author && <p className="flex-1 text-[14px]">Total Likes : {details.author.totalLikes}</p>}
-                                    </div>
+                                    {details.author && <p>Total Posts: {details.author.totalPost}</p>}
+                                    {details.author && <p>Total Likes: {details.author.totalLikes}</p>}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* "Donate Now" Button */}
                     <div className="flex justify-center">
-                        <button onClick={makePayment} className="bg-blue-500 text-white py-2 px-6 rounded-full text-lg">
+                        <button onClick={() => setDialogOpen(true)} className="bg-blue-500 text-white py-2 px-6 rounded-full text-lg">
                             Donate Now
                         </button>
                     </div>
@@ -186,15 +147,33 @@ const ReadBlog = () => {
                     <div className="width-[100%]] flex">
                         <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]"></span>
                         <p className="mr-4 ml-4 text-[40px]">Content</p>
-                        <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]" ></span>
+                        <span className="flex-1 border-2 border-cyan-300 h-0 relative top-[30px]"></span>
                     </div>
                     <div className="w-[100%]">
-                        {
-                            details.data && <div className="blogPage w-[100%] " dangerouslySetInnerHTML={{ __html: details.data }}></div>
-                        }
+                        {details.data && <div className="blogPage w-[100%]" dangerouslySetInnerHTML={{ __html: details.data }}></div>}
                     </div>
                 </div>
             </div>
+
+            {/* Donation Dialog */}
+            <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="sm" fullWidth>
+                <DialogTitle>Choose Donation Amount</DialogTitle>
+                <DialogContent>
+                    <RadioGroup value={donationAmount} onChange={(e) => setDonationAmount(e.target.value)}>
+                        {[5, 10, 50, 100, 500].map((amount) => (
+                            <FormControlLabel key={amount} value={amount.toString()} control={<Radio />} label={`$${amount}`} />
+                        ))}
+                    </RadioGroup>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setDialogOpen(false)} color="secondary">
+                        Cancel
+                    </Button>
+                    <Button onClick={handlePayment} color="primary" variant="contained">
+                        Proceed to Pay
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 };
