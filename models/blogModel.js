@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+//refactor
 const blogSchema = {
     image:{
         type:String,

@@ -2,7 +2,7 @@ import User from "../models/userModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Blog from "../models/blogModel.js";
-
+//refactor
 export const signInUser = async (req, res) => {
     try {
         if (!req.body.username || !req.body.password || !req.body.email) {

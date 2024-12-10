@@ -2,7 +2,7 @@ import express from "express";
 import { createBlog,getUserBlog,checkBookMark,getBookmark,getSelectedBlog,Bookmark,checkIfLike,updateBlog,deleteBlog,getSingleBlog,LikedOrDisliked,createComment,getComment,deleteComment} from "../controllers/blog-controllers.js";
 import middlewareAuth from "../controllers/MiddlewareAuth.js";
 const blogRoutes = express.Router();
-
+//refactor
 blogRoutes.route('/liked/:blogId')
 .get(middlewareAuth,checkIfLike)
 .post(middlewareAuth,LikedOrDisliked);
