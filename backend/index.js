@@ -31,6 +31,8 @@ const allowedOrigins = [
 // CORS Middleware
 app.use((req, res, next) => {
     const origin = req.headers.origin;
+    console.log('CORS Middleware triggered');
+    console.log('Origin:', origin);
 
     if (!origin || allowedOrigins.includes(origin)) {
         res.setHeader('Access-Control-Allow-Origin', origin || '*');
@@ -41,6 +43,7 @@ app.use((req, res, next) => {
         console.error(`Blocked by CORS: Origin ${origin}`);
     }
 
+    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         return res.sendStatus(204);
     }
