@@ -5,18 +5,12 @@ import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
 import connectDB from './connection/connection.js';
-import nodemailer from 'nodemailer';
 import { Stripe } from 'stripe';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 8092;
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2023-08-16',
@@ -70,17 +64,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes
+// API Routes
 app.use('/api/', userRoutes);
 app.use('/api/', blogRoutes);
-
-// Serve static files for frontend
-app.use(express.static(path.resolve(__dirname, 'BlogApp', 'dist')));
-
-// Catch-all route for SPA
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'BlogApp', 'dist', 'index.html'));
-});
 
 // Stripe Checkout Session Endpoint
 app.post('/create-checkout-session', async (req, res) => {
