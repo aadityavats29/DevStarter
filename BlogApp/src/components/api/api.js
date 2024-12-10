@@ -1,6 +1,6 @@
 import axios from 'axios';
-//const url = `http://localhost:8092/api`;
-const url = `${window.location.origin}/api`;
+const url = `http://localhost:8092/api`;
+//const url = `${window.location.origin}/api`;
 
 export const LoginUser = async (data) => {
     try {
