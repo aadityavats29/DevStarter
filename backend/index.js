@@ -22,7 +22,17 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2023-08-16',
 });
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://dev-starter-frontend.vercel.app', // Your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    credentials: true, // If you are using cookies or authorization headers
+}));
+app.options('*', cors({
+    origin: 'https://dev-starter-frontend.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}));
+
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
