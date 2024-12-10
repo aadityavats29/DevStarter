@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = `https://dev-starter-backend.vercel.app/`;
+const url = `https://dev-starter-backend.vercel.app`;
 //const url = `${window.location.origin}/api`;
 
 export const LoginUser = async (data) => {
