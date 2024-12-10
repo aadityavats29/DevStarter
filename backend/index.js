@@ -65,8 +65,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // API Routes
-app.use('/api/', userRoutes);
-app.use('/api/', blogRoutes);
+app.use('/', userRoutes);
+app.use('/', blogRoutes);
 
 // Stripe Checkout Session Endpoint
 app.post('/create-checkout-session', async (req, res) => {
