@@ -1,6 +1,5 @@
 # Logs
 *.env
-vercel.json
 logs
 *.log
 npm-debug.log*
