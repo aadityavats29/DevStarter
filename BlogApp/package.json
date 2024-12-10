@@ -15,6 +15,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@stripe/stripe-js": "^5.2.0",
+    "@vercel/edge-config": "^1.4.0",
     "axios": "^1.6.8",
     "firebase": "^10.11.1",
     "gsap": "^3.12.5",
