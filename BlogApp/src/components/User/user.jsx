@@ -20,13 +20,13 @@ import BookMark from "./bookMark";
 const User = () => {
     const fileInputRef = useRef(null);
     const [user, setUser] = useState({});
+    const [originalUser, setOriginalUser] = useState({}); // To store original user details
     const { setAccount } = useContext(DataContext);
     const [selectedFile, setSelectedFile] = useState(null);
     const [showProgress, setProgress] = useState(false);
     const [imageFileUploadProgress, setImageFileUploadProgress] = useState(0);
     const [imageUrl, setImageUrl] = useState(null);
     const [value, setValue] = useState(0);
-
     const navigate = useNavigate();
 
     const handleChange = (event, newValue) => {
@@ -60,6 +60,7 @@ const User = () => {
             const response = await getUserDetails();
             if (response.status && response.status === "success") {
                 setUser(response);
+                setOriginalUser(response); // Set the original user data
                 setImageUrl(response.image);
             }
         };
@@ -98,6 +99,8 @@ const User = () => {
     const onInputChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
+        // Update localStorage immediately when input changes
+        localStorage.setItem('user', JSON.stringify({ ...user, [name]: value }));
     };
 
     const DeleteUser = async () => {
@@ -131,12 +134,22 @@ const User = () => {
         }
 
         const response = await UpdateUser(user);
+        
         if (response.status && response.status === "success") {
+            // After successful update, update the localStorage
+            localStorage.setItem('user', JSON.stringify({ ...response.data, username: user.username, email: user.email }));
+            if(user.username){
+                localStorage.setItem('username',user.username);
+            }
+
             toast.success("Your profile has been updated", { position: "top-center" });
             setTimeout(() => {
                 navigate("/");
             }, 1000);
         } else if (response.status && response.status === "fail") {
+            // Revert to the original user state if the update fails
+            setUser(originalUser); // Set back to original values
+
             toast.error(response.message, { position: "top-center" });
         }
     };
